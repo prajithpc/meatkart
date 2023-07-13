@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% block body %}
+
+
+<section id="home-section" class="hero">
+  <div class="home-slider js-fullheight owl-carousel">
+    <div class="slider-item js-fullheight">
+      <div class="overlay"></div>
+      <div class="container-fluid p-0">
+        <div class="row d-md-flex no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
+          <div class="one-third order-md-last img js-fullheight" style="background-image:url(static/images/nhy.jpg);">
+          </div>
+          <div class="one-forth d-flex js-fullheight align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+            <div class="text">
+              {% comment %} <span class="subheading">Winkel eCommerce Shop</span> {% endcomment %}
+              <div class="horizontal">
+                {% comment %} <h3 class="vr" style="background-image: url(static/images/divider.jpg);">Stablished Since 2000</h3>
+                <h1 class="mb-4 mt-3">Catch Your Own <br><span>Stylish &amp; Look</span></h1>
+                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country.</p>
+                 {% endcomment %}
+                <p><a href="products_home" class="btn btn-primary px-5 py-3 mt-3">Shop Now</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slider-item js-fullheight">
+      <div class="overlay"></div>
+      <div class="container-fluid p-0">
+        <div class="row d-flex no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
+          <div class="one-third order-md-last img js-fullheight" style="background-image:url(static/images/beef.jpg);">
+          </div>
+          <div class="one-forth d-flex js-fullheight align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+            <div class="text">
+              {% comment %} <span class="subheading">Winkel eCommerce Shop</span>
+              <div class="horizontal">
+                <h3 class="vr" style="background-image: url(static/images/divider.jpg);">Best eCommerce Online Shop</h3>
+                <h1 class="mb-4 mt-3">A Thouroughly <span>Modern</span> Woman</h1>
+                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country.</p> {% endcomment %}
+                
+                <p><a href="" class="btn btn-primary px-5 py-3 mt-3">Shop Now</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+{% comment %} <section class="ftco-section bg-light">
+  <div class="container">
+    <div class="row justify-content-center mb-3 pb-3">
+      <div class="col-md-12 heading-section text-center ftco-animate">
+        <h2 class="mb-4">Best Sellers</h2>
+        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+      </div>
+    </div>   		
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm col-md-6 col-lg ftco-animate">
+        <div class="product">
+          <a href="#" class="img-prod"><img class="img-fluid" src="{% static 'images/product-1.jpg' %}" alt="Colorlib Template">
+            <span class="status">30%</span>
+            <div class="overlay"></div>
+          </a>
+          <div class="text py-3 px-3">
+            <h3><a href="#">Floral Jackquard Pullover</a></h3>
+            <div class="d-flex">
+              <div class="pricing">
+                <p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span></p>
+              </div>
+              <div class="rating">
+                <p class="text-right">
+                  <a href="#"><span class="ion-ios-star-outline"></span></a>
+                  <a href="#"><span class="ion-ios-star-outline"></span></a>
+                  <a href="#"><span class="ion-ios-star-outline"></span></a>
+                  <a href="#"><span class="ion-ios-star-outline"></span></a>
+                  <a href="#"><span class="ion-ios-star-outline"></span></a>
+                </p>
+              </div>
+            </div>
+            <p class="bottom-area d-flex px-3">
+              <a href="#" class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+              <a href="#" class="buy-now text-center py-2">Buy now<span><i class="ion-ios-cart ml-1"></i></span></a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm col-md-6 col-lg ftco-animate">
+        <div class="product">
+          <a href="#" class="img-prod"><img class="img-fluid" src="{% static 'images/product-2.jpg'%}" alt="Colorlib Template">
+            <div class="overlay"></div>
+          </a>
+          <div class="text py-3 px-3">
+            <h3><a href="#">Floral Jackquard Pullover</a></h3>
+            <div class="d-flex">
+              <div class="pricing">
+                <p class="price"><span>$120.00</span></p>
+              </div>
+              <div class="rating">
+                <p class="text-right">
+                  <a href="#"><span class="ion-ios-star-outline"></span></a>
+                  <a href="#"><span class="ion-ios-star-outline"></span></a>
+                  <a href="#"><span class="ion-ios-star-outline"></span></a>
+                  <a href="#"><span class="ion-ios-star-outline"></span></a>
+                  <a href="#"><span class="ion-ios-star-outline"></span></a>
+                </p>
+              </div>
+            </div>
+            <p class="bottom-area d-flex px-3">
+              <a href="#" class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+              <a href="#" class="buy-now text-center py-2">Buy now<span><i class="ion-ios-cart ml-1"></i></span></a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm col-md-6 col-lg ftco-animate">
+        <div class="product">
+          <a href="#" class="img-prod"><img class="img-fluid" src="{% static 'images/product-3.jpg'%}" alt="Colorlib Template">
+            <div class="overlay"></div>
+          </a>
+          <div class="text py-3 px-3">
+            <h3><a href="#">Floral Jackquard Pullover</a></h3>
+            <div class="d-flex">
+              <div class="pricing">
+                <p class="price"><span>$120.00</span></p>
+              </div>
+              <div class="rating">
+                <p class="text-right">
+                  <a href="#"><span class="ion-ios-star-outline"></span></a>
+                  <a href="#"><span class="ion-ios-star-outline"></span></a>
+                  <a href="#"><span class="ion-ios-star-outline"></span></a>
+                  <a href="#"><span class="ion-ios-star-outline"></span></a>
+                  <a href="#"><span class="ion-ios-star-outline"></span></a>
+                </p>
+              </div>
+            </div>
+            <p class="bottom-area d-flex px-3">
+              <a href="#" class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+              <a href="#" class="buy-now text-center py-2">Buy now<span><i class="ion-ios-cart ml-1"></i></span></a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm col-md-6 col-lg ftco-animate">
+        <div class="product">
+          <a href="#" class="img-prod"><img class="img-fluid" src="{% static 'images/product-4.jpg'%}" alt="Colorlib Template">
+            <div class="overlay"></div>
+          </a>
+          <div class="text py-3 px-3">
+            <h3><a href="#">Floral Jackquard Pullover</a></h3>
+            <div class="d-flex">
+              <div class="pricing">
+                <p class="price"><span>$120.00</span></p>
+              </div>
+              <div class="rating">
+                <p class="text-right">
+                  <a href="#"><span class="ion-ios-star-outline"></span></a>
+                  <a href="#"><span class="ion-ios-star-outline"></span></a>
+                  <a href="#"><span class="ion-ios-star-outline"></span></a>
+                  <a href="#"><span class="ion-ios-star-outline"></span></a>
+                  <a href="#"><span class="ion-ios-star-outline"></span></a>
+                </p>
+              </div>
+            </div>
+            <p class="bottom-area d-flex px-3">
+              <a href="#" class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+              <a href="#" class="buy-now text-center py-2">Buy now<span><i class="ion-ios-cart ml-1"></i></span></a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> {% endcomment %}
+
+{% endblock  %}
