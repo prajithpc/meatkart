@@ -3,6 +3,9 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import handler404
+from django.views.generic import TemplateView
+
+
 """
 URL configuration for meatcart project.
 
@@ -26,9 +29,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('home.urls')),
     path('user',include('users.urls')),
-    path('admins/',include('admins.urls')),
+    path('admin_dashboard/',include('admins.urls')),
+    path('cart/',include('carts.urls')),
+
+   
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     
 
-# handler404= 'home.views.error_404'
+
+
+
 

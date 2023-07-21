@@ -3,6 +3,7 @@ from . import views
 
 
 
+
 urlpatterns = [
     path('block/<int:id>/',views.user_block,name='user_block'),
     path('unblock/<int:id>/',views.user_unblock,name='user_unblock'),
@@ -24,6 +25,12 @@ urlpatterns = [
 
 
 
+    path('banner',views.banner,name='banner'),
+    path('banner_add',views.banner_add,name='banner_add'),
+    path('banner_delete/<str:id>',views.banner_delete,name='banner_delete'),
 
+
+  
+    
     
 ]

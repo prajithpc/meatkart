@@ -2,13 +2,21 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import TemplateView
+
+from django.core.exceptions import ObjectDoesNotExist
+from carts.models import *
+
+
 
 
 # Create your views here.
 
 
 def index(request):
-    return render(request, 'home/home.html')
+    banners = Banner.objects.all()
+    context = {'banners': banners}
+    return render(request, 'home/home.html', context)
     
 
 def products_home(request):
@@ -32,44 +40,51 @@ def single_product(request,id):
     }
     return render(request, 'home/product-single.html',context)
 
-# def error_404(request,exception):
-#     return render(request,'404.html')
+
+def checkout(request):
+    return render(request,'home/checkout.html')
 
 
-# def single_product(request,id):
-#     products = Product.objects.get(id=id)
-#     product_images = ProductImages.objects.filter(name=products)
-#     colors = ProductImages.objects.filter(name=products).values_list('colors__color_name', flat=True).distinct()
-#     selected_color = request.GET.get('color')
-#     selected_varient = request.GET.get('size')
-#     product_varients = ProductVarient.objects.filter(name=products)
-#     for i in range(0,len(product_images)):
-#         product_images[i].str_colors = str(product_images[i].colors)
-#     if not selected_color:
-#         selected_color = product_images[0].str_colors
-#     varients = ProductVarient.objects.filter(name = products)
-#     str_varients = []
-#     for i in range(0, len(varients)):
-#         if (str(varients[i].colors) == selected_color):
-#             str_varients.append(str(varients[i].size)) 
+def order_list(request):
+    return render(request,'admin')
 
-#     if not selected_varient:
-#         selected_varient = str_varients[0]
-#     the_color = selected_color
-#     the_size = int(selected_varient)
-#     my_varient = None
-#     for i in range(0, len(product_varients)):
-#         if product_varients[i].colors.colors.color_name == the_color and product_varients[i].size.size_number == the_size:
-#             my_varient = product_varients[i]
-#             break    
-#     context = {
-#         'products':products, 
-#         'product_images':product_images,
-#         'varients':varients,
-#         'str_varients':str_varients,
-#         'colors' : colors,
-#         'selected_color': selected_color,
-#         'selected_varient': selected_varient,
-#         'my_varient_id': str(my_varient.id),
-#         }
-#     return render(request,'home/product-single.html', context)
+
+def checkout(request):
+    total = 0
+    quantity = 0
+    tax = 0
+    grand_total = 0
+    cart_items = None
+
+    try:
+        cart = Cart.objects.get(cart_id=_cart_id(request))
+        cart_items = Cartitem.objects.filter(cart=cart, is_active=True)
+        for cart_item in cart_items:
+            total += (cart_item.product.product_price_per_kg * cart_item.quantity)
+            quantity += cart_item.quantity
+
+        tax = (2 * total) / 100
+        grand_total = total + tax
+
+    except ObjectDoesNotExist:
+        cart_items = None
+
+    context = {
+        'total': total,
+        'quantity': quantity,
+        'cart_items': cart_items,
+        'tax': tax,
+        'grand_total': grand_total,
+    }
+
+    return render(request, 'home/checkout.html', context)
+
+def _cart_id(request):
+    cart = request.session.session_key
+    if not cart:
+        cart = request.session.create
+    return cart
+
+
+def success(request):
+    return render(request,'home/success.html')

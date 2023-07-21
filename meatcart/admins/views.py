@@ -4,8 +4,13 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from home.models import *
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404,HttpResponse
 from home.models import Product, Categories
+from django.conf import settings
+import os
+from home.models import Banner
+from django.contrib.auth.decorators import login_required
+
 
 # from .models import Student
 # Create your views here.
@@ -94,7 +99,6 @@ def product_add(request):
             product_available_stock = product_available_stock
         )
         products.save()
-        print('product list', products)
         return redirect('product_list')
     
 def product_edit(request):
@@ -119,10 +123,22 @@ def product_update(request, id):
         # Update other product details
         product.product_name = product_name
         product.product_category = get_object_or_404(Categories, id=category_id)
-        product.product_image = product_image
+        # product.product_image = product_image
         product.product_description = product_description
         product.product_price_per_kg = product_price_per_kg
         product.product_available_stock = product_available_stock   
+
+
+        if product_image:
+            # Delete old image file if it exists
+            if product.product_image:
+                # Remove the file from the storage
+                os.remove(os.path.join(settings.MEDIA_ROOT, str(product.product_image)))
+
+            # Save the new image file
+            product.product_image = product_image
+
+
        
         # Save the updated product
         product.save()
@@ -176,3 +192,35 @@ def category_update(request,id):
 
         return redirect('category_add')
     return render(request, 'admin/admin_category.html', {'category': category})
+
+
+def banner(request):
+    banners = Banner.objects.all()
+    context = {'banners':banners}
+    return render(request,'admin/banner.html',context)
+
+
+
+def banner_add(request):
+    if request.method == 'POST':
+        # Process the form submission
+        banner_image = request.FILES.get('banner_image')
+        banner = Banner(banner_image=banner_image)
+        banner.save()
+        return redirect('banner')
+    else:
+        # Display the form
+        context = {}
+        return render(request, 'admin/banner.html', context)
+
+
+def banner_delete(request, id):
+    if request.method == 'GET':
+        banner = get_object_or_404(Banner, id=id)
+        banner.delete()
+        return redirect('banner')
+    # else:
+    #     # Handle GET request if needed
+    #     # For example, you could render a confirmation template
+    #     return HttpResponse("GET request not allowed for this view.")
+

@@ -140,8 +140,9 @@
 					
 					<div class="form-group">
 						<label>Image</label>
-						{% comment %} <img src="{{ product.product_image.url }}" alt="Product Thumbnail" width="100" height="100"> {% endcomment %}
-						
+						{% if product.product_image %}
+						<img src="{{ product.product_image.url }}" alt="Product Thumbnail" width="100" height="100">
+						{% endif %}
 						<input type="file" name="product_image" accept="image/*">
 					</div>
 
