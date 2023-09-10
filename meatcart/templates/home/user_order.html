@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block body %}
+    <h1>Order Details</h1>
+    <p><strong>Order Number:</strong> {{ order.order_number }}</p>
+    <p><strong>Name:</strong> {{ order.first_name }} {{ order.last_name }}</p>
+    <p><strong>Phone:</strong> {{ order.phone }}</p>
+    <p><strong>Email:</strong> {{ order.email }}</p>
+    <p><strong>Address:</strong> {{ order.address_line_1 }}, {{ order.district }}, {{ order.city }}</p>
+    <p><strong>Order Total:</strong> ₹ {{ order.order_total }}</p>
+    <p><strong>Tax:</strong> ₹ {{ order.tax }}</p>
+    <p><strong>Status:</strong> {{ order.status }}</p>
+    <p><strong>Payment Method:</strong> {{ order.payment.payment_method }}</p>
+
+    <h2>Ordered Products</h2>
+    {% for order_item in order.order_items.all %}
+
+    <p><strong>Product:</strong> {{ order_item.cart_item.product.product_name }}</p>
+    <p><strong>Price:</strong> {{ order_item.product_price }}</p>
+    <p><strong>Quantity:</strong> {{ order_item.cart_item.quantity }}</p>
+
+    {% endfor %}
+
+
+
+{% endblock %}

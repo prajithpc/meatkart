@@ -20,8 +20,10 @@
 <br>
 <br>
 
-<h2 style="text-align: center; display: flex; justify-content: center; align-items: center;">Payment is successful</h2>
+<h2 style="text-align: center; display: flex; justify-content: center; align-items: center;">Order is successful</h2>
+<h6 style="text-align: center; display: flex; justify-content: center; align-items: center;">your shipment will recieve in 2hours</h6>
 <br>
+<p>Your order was placed successfully. You can <a href="{% url 'order_detail' order.order_number %}">click here</a> to view your order details.</p>
 
 <div class="text-center">
   <a href="{% url 'products_home' %}" class="btn btn-primary}">Continue Shopping</a>

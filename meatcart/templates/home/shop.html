@@ -3,6 +3,8 @@
 
 {% extends 'base.html' %}
 
+{% load product_tags %}
+
 {% block body %}
 
 
@@ -28,14 +30,16 @@
 
 						<div class="product">
 							<a href="single_product/{{product.id}}" class="img-prod"><img class="img-fluid" src="{{ product.product_image.url }}" alt="Colorlib Template" style="width: 18rem;height: 15rem;">
-								{% comment %} <span class="status">30%</span> {% endcomment %}
-								{% comment %} <div class="overlay"></div> {% endcomment %}
+								{% if product.product_discount %}
+								<span class="status">{{ product.product_discount }}% off</span>
+								{% endif %}
+								<div class="overlay"></div>
 							</a>
 							<div class="text py-3 px-3">
 								<h3><a href="single_product/{{product.id}}">{{ product.product_name }}</a></h3>
 								<div class="d-flex">
 									<div class="pricing">
-										<p class="price"><span class="price-sale">₹{{ product.product_price_per_kg }}</span></p>
+										<p class="price"><span class="price-sale">₹{% call_price  product.product_price_per_kg  product.product_discount %}</span>&nbsp;&nbsp;&nbsp;<del>{{ product.product_price_per_kg }}</del></p>
 									</div>
 									{% comment %} <div class="rating">
 										<p class="text-right">
@@ -48,8 +52,16 @@
 									</div> {% endcomment %}
 								</div>
 								<p class="bottom-area d-flex px-3">
+									{% if product.product_available_stock <= 0 %}
+				
+				<a class="add-to-cart text-center py-2 mr-1"><span>Out Of Stock<i class="ion-ios ml-1"></i></span></a>
+				{% else %}
+				
+				
 									<a href="{% url 'add_cart' id=product.id %}" class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
 									<a href="#" class="buy-now text-center py-2">Buy now<span><i class="ion-ios-cart ml-1"></i></span></a>
+									<a href="{% url 'addtowishlist' %}?product_id={{ product.id }}" class="add-to-cart text-center py-2 mr-1"><span><i class="icon-heart"></i></span></a>
+									{% endif %}
 								</p>
 							</div>
 						</div>
@@ -321,3 +333,43 @@
 </section>
 
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+from django.shortcuts import render, redirect
+from django.contrib import messages
+
+def add_to_wishlist(request, product_id):
+    # Get the product with the given ID (you'll need to import your Product model here)
+    try:
+        product = Product.objects.get(pk=product_id)
+    except Product.DoesNotExist:
+        messages.error(request, 'Product not found.')
+        return redirect('shoplist')  # or any other appropriate URL
+
+    # Add the product to the user's wishlist (you can use session or database here)
+    # For example, using session:
+    if 'wishlist' not in request.session:
+        request.session['wishlist'] = []
+    if product_id not in request.session['wishlist']:
+        request.session['wishlist'].append(product_id)
+        messages.success(request, f'Product "{product.product_name}" added to wishlist.')
+    else:
+        messages.info(request, f'Product "{product.product_name}" is already in the wishlist.')
+
+    return redirect('shoplist')  # Redirect back to the shoplist page after adding to wishlist {% endcomment %}

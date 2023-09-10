@@ -8,3 +8,4 @@ class ProductAdmin(admin.ModelAdmin):
 
 admin.site.register(Categories)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Wishitem)

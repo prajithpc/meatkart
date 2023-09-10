@@ -24,6 +24,7 @@
 										<th>Image</th>
 										<th>Description</th>
 										<th>Price/kg</th>
+										<th>discount</th>
 										<th>Stock</th>
                     <th>Action</th>
                   </tr>
@@ -36,6 +37,7 @@
 										<td> {% if product.product_image %}<img src="{{ product.product_image.url }}">{% endif %}</td>
 										<td>{{ product.product_description }}</td>
 										<td>{{ product.product_price_per_kg }}</td>		
+										<td>{{ product.product_discount }}</td>		
 										<td>{{ product.product_available_stock }} kg</td>										
 
                     <td style="display: flex;">
@@ -92,6 +94,11 @@
 						<div class="form-group">
 							<label>Price per kg</label>
 							<input type="text" class="form-control" name="product_price_per_kg" required>
+						</div>
+
+						<div class="form-group">
+							<label>discount</label>
+							<input type="text" class="form-control" name="product_discount" >
 						</div>
 
 						<div class="form-group">
@@ -155,6 +162,11 @@
 					<div class="form-group">
 						<label>Price/kg</label>
 						<input type="text" class="form-control" value="{{product.product_price_per_kg}}" name="product_price_per_kg" required>
+					</div>
+
+					<div class="form-group">
+						<label>discount</label>
+						<input type="text" class="form-control" value="{{product.product_discount}}" name="product_discount" >
 					</div>
 
 					<div class="form-group">

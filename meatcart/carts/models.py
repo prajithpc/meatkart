@@ -16,13 +16,30 @@ class Cart(models.Model):
 
 
 class Cartitem(models.Model):
+    
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     is_active = models.BooleanField(default=True)
 
+    # def sub_total(self):
+    #     return self.product.product_price_per_kg * self.quantity
+
     def sub_total(self):
-        return self.product.product_price_per_kg * self.quantity
+        product_price_per_kg = float(self.product.product_price_per_kg)
+        product_discount = float(self.product.product_discount)
+
+        # Calculate the discounted amount
+        if product_discount is None or product_discount == 0:
+            discounted_amount = product_price_per_kg
+        else:
+            discounted_amount = product_price_per_kg - (product_price_per_kg * product_discount / 100)
+
+        return discounted_amount * self.quantity
+
+
+    # def __str__(self):
+    #     return self.product
 
     def __str__(self):
-        return self.product
+        return f"{self.product} - {self.quantity}"

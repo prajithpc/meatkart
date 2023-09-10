@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Address Template</title>
+    <style>
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Your Address</h2>
+        <textarea id="addressInput" rows="4" cols="50" placeholder="Enter your address"></textarea>
+        <br>
+        <button id="saveButton">Save Address</button>
+    </div>
+
+    <div class="container">
+        <h2>Saved Addresses</h2>
+        <ul id="savedAddresses"></ul>
+    </div>
+
+    <script>
+        const addressInput = document.getElementById("addressInput");
+        const savedAddressesList = document.getElementById("savedAddresses");
+        const saveButton = document.getElementById("saveButton");
+
+        let addresses = [];
+
+        saveButton.addEventListener("click", function() {
+            const address = addressInput.value;
+            if (address.trim() !== "") {
+                addresses.push(address);
+                updateSavedAddressesList();
+                addressInput.value = "";
+            }
+        });
+
+        function updateSavedAddressesList() {
+            savedAddressesList.innerHTML = "";
+            addresses.forEach(function(address) {
+                const listItem = document.createElement("li");
+                listItem.textContent = address;
+                savedAddressesList.appendChild(listItem);
+            });
+        }
+    </script>
+</body>
+</html>
+

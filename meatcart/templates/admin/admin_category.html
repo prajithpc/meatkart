@@ -21,7 +21,7 @@
                   <tr>
 					<th>Brand Name</th>
 					<th>Status</th>
-					<th style="padding-right: 55rem;">Action</th>
+					<th style="display:flex;align-items:center;justify-content:center">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -35,9 +35,11 @@
 						<label class="badge badge-info">Active</label>
 						{% endif %}	
 					</td>
-                    <td style="display: flex;">
-                      <a href="#editEmployeeModal-{{ forloop.counter }}" class="btn btn-warning" data-toggle="modal" title="Edit">Edit</a>&nbsp;&nbsp;
+                    <td style="display: flex;justify-content:space-around">
+                      <div>
+												<a href="#editEmployeeModal-{{ forloop.counter }}" class="btn btn-warning" data-toggle="modal" title="Edit">Edit</a>&nbsp;&nbsp;
                       <a href="#deleteEmployeeModal-{{ forloop.counter }}" class="btn btn-secondary deleteBtn" data-toggle="modal" title="Delete">Delete</a>&nbsp;&nbsp;
+											</div>
 						<!-- Toggle category block status form -->
 						{% comment %} <form id="toggle-category-form" method="POST" action="{% url 'change_category_block_status' category.id %}">
 							{% csrf_token %}

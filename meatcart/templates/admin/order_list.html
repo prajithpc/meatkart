@@ -1,0 +1,93 @@
+{% extends 'admin_base.html' %}
+
+{% block body %}
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Order Management</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped" style="text-align: center" id="myTable">
+                            <thead>
+                                <tr>
+                                    <th>Order No</th>
+                                    <th>User</th>
+                                    <th>Address</th>
+                                    <th>Order Date</th>
+                                    <th>Order Status</th>
+                                    <th>Payment Method</th>
+                                    <th>Payment Status</th>
+                                    <th>Payment Amount</th>
+                                    
+                                    <th>Product Name</th>
+                                    <th>Action</th>
+                                    
+                                </tr>
+                            </thead>
+														{% for order, order_items in order_data.items %}
+                            <tbody>
+                                <tr>
+                                    <td rowspan="{{ order_items.count }}">{{ order.order_number }}</td>
+                                    <td rowspan="{{ order_items.count }}">{{ order.first_name }}</td>
+                                    <td rowspan="{{ order_items.count }}">{{ order.address_line_1 }}</td>
+                                    <td rowspan="{{ order_items.count }}">{{ order.created_at }}</td>
+                                    <td rowspan="{{ order_items.count }}">{{ order.status }}</td>
+                                    <td rowspan="{{ order_items.count }}">{{ order.payment.payment_method }}</td>
+                                    <td rowspan="{{ order_items.count }}">{{ order.payment.status }}</td>
+                                    <td rowspan="{{ order_items.count }}">{{ order.payment.amount_paid }}</td>
+                                    <td rowspan="{{ order_items.count }}">{{ order.OrderProduct.cart_item }}</td>
+									<td>								
+                                        <a href="#" class="btn btn-warning edit-order-btn" data-toggle="modal" data-target="#editEmployeeModal" data-order-id="{{ order.id }}">Edit</a>
+                                    </td>
+                                    <td >{{ order_item.product.product_name }}</td>
+                                    
+                                </tr>
+															</tbody>
+															{% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <div id="editEmployeeModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="edit-order-form" method="post">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Order Status</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Status</label>
+                            <input name="status" type="text" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" id="update-order-url" value="{% url 'update_order_status' 0 %}">
+
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-info" value="Update">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        $(document).ready(function () {
+            $(".edit-order-btn").click(function () {
+                var orderId = $(this).data("order-id");
+                var formAction = $("#update-order-url").val().replace("0", orderId + '/');
+                $("#edit-order-form").attr("action", formAction);
+            });
+        });
+    </script>
+{% endblock %}

@@ -89,6 +89,16 @@ def product_add(request):
         product_description = request.POST.get('product_description')
         product_price_per_kg = request.POST.get('product_price_per_kg')
         product_available_stock = request.POST.get('product_available_stock')
+        product_discount = request.POST.get('product_discount')
+
+
+        try:
+            product_discount = int(product_discount)
+        except ValueError:
+            # Handle the case when the discount is not a valid integer
+            product_discount = 0
+
+
         product_category=get_object_or_404(Categories, id=category_id)
         products = Product(
             product_name = product_name,
@@ -96,6 +106,7 @@ def product_add(request):
             product_image = product_image,
             product_description = product_description,
             product_price_per_kg = product_price_per_kg,
+            product_discount = product_discount,
             product_available_stock = product_available_stock
         )
         products.save()
@@ -116,7 +127,15 @@ def product_update(request, id):
         product_image = request.FILES.get('product_image')
         product_description = request.POST.get('product_description')
         product_price_per_kg = request.POST.get('product_price_per_kg')
+        product_discount = request.POST.get('product_discount')
         product_available_stock = request.POST.get('product_available_stock')
+
+
+        try:
+            product_discount = int(product_discount)
+        except ValueError:
+            # Handle the case when the discount is not a valid integer
+            product_discount = 0
         
         # Retrieve the updated 'product_thumbnail' field value
         
@@ -126,6 +145,7 @@ def product_update(request, id):
         # product.product_image = product_image
         product.product_description = product_description
         product.product_price_per_kg = product_price_per_kg
+        product.product_discount = product_discount
         product.product_available_stock = product_available_stock   
 
 
@@ -223,4 +243,10 @@ def banner_delete(request, id):
     #     # Handle GET request if needed
     #     # For example, you could render a confirmation template
     #     return HttpResponse("GET request not allowed for this view.")
+
+
+
+
+
+
 
